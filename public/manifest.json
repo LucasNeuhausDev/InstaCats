@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "InstaCats",
+  "name": "InstaCats | The Platform for Cute Cats",
   "icons": [
     {
       "src": "favicon.ico",
