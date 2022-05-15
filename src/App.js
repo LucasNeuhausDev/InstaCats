@@ -7,12 +7,13 @@ import { getCats } from './features/post/postSlice';
 
 function App() {
   const dispatch = useDispatch()
-  dispatch(getCats())
+  const numberOfPosts = 10
+  dispatch(getCats(numberOfPosts))
 
   return (
     <>
       <Header />
-      <main className="min-h-screen">
+      <main className="">
         <PostList />
       </main>
     </>

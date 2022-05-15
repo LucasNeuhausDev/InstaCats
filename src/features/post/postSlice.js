@@ -1,22 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+
 const initialState = {
     posts: [],
 }
 
 export const getCats = createAsyncThunk(
     "post/getCats",
-    async () => {
+    async (numberOfPosts) => {
         const posts = []
-
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < numberOfPosts; i++) {
             const uniqueNum = Math.random();
-
             posts.push({
                 user: "Unknown",
                 url: `https://cataas.com/cat?uniqueNum=${uniqueNum}`,
                 comments: [],
-                meows: 0
+                meows: 0,
             })
         }
 
@@ -39,6 +38,10 @@ export const postSlice = createSlice({
 
         addMeow: (state, action) => {
             state.posts[action.payload.id].meows += 1
+        },
+
+        setPostLoaded: (state, action) => {
+            state.posts[action.payload.id].isLoaded = true
         }
     },
 
@@ -50,8 +53,9 @@ export const postSlice = createSlice({
     }
 })
 
-export const { addPost, addComment, addMeow } = postSlice.actions
+export const { addPost, addComment, addMeow, setPostLoaded } = postSlice.actions
 
-export const selectPost = (state) => state.post.posts
+export const selectPost = (state) => state.post
+export const selectIsLoaded = (state) => state.post.posts.every(p => p.isLoaded === true)
 
 export default postSlice.reducer

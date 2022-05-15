@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../user/userSlice'
-import { addComment, addMeow } from './postSlice'
+import { addComment, addMeow, setPostLoaded } from './postSlice'
+
 
 export default function Post({ postData, id }) {
     const user = useSelector(selectUser)
@@ -9,9 +10,9 @@ export default function Post({ postData, id }) {
     const [input, setInput] = useState("")
 
     return (
-        <div className="grow-0 mx-auto max-w-md rounded-md overflow-hidden shadow-md">
+        <div className={`grow-0 mx-auto max-w-md rounded-md overflow-hidden shadow-md`}>
             <div className="relative">
-                <img src={postData.url} className="" alt="cat" />
+                <img src={postData.url} className="" alt="cat" onLoad={() => dispatch(setPostLoaded({ id }))} />
                 <button className="absolute bottom-2 right-2 rounded-md p-2 bg-gray-200 hover:bg-orange-200 transition-colors"
                     onClick={() => dispatch(addMeow({ id: id }))}
                 >
